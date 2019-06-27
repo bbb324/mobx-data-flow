@@ -1,14 +1,30 @@
-import {observable, autorun} from 'mobx';
+import { computed, observable} from 'mobx';
 
-class TodoStore {
-    @observable todos = ['buy m', 'buy n'];
-    @observable filter = '';
+class Todo {
+    @observable value;
+    @observable id;
+    @observable complete;
+
+    constructor(value) {
+        this.value = value;
+        this.id = Date.now();
+        this.complete = false;
+    }
 }
 
-let store = window.store = new TodoStore();
-export default store;
+class TodoStore {
+    @observable todos = [];
+    @observable filter = '';
 
-autorun(() => {
-    console.log(store.filter);
-    console.log(store.todos[0]);
-});
+    @computed get filterTodos() {
+        let matchFilter = new RegExp(this.filter, 'i');
+        return this.todos.filter(todo => !this.filter || matchFilter.test(todo.value));
+    }
+
+    createTodos(value) {
+        this.todos.push(new Todo(value));
+    }
+}
+
+
+export default new TodoStore();

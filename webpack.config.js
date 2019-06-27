@@ -6,8 +6,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
     entry: {
         pageOne: './src/todoList/index.jsx',
-        pageTwo: './src/trafficLight/index.jsx',
     },
+
     output: {
         path: path.resolve(__dirname, 'build'),
         filename: '[name].js',
@@ -15,12 +15,19 @@ module.exports = {
         hotUpdateMainFilename: 'hot/hot-update.json'
     },
     plugins: [
+        // 参照 index.html 模板生成对应可使用的页面，自带所有js的关联
         new HtmlWebpackPlugin({
             template: './public/index.html',
             filename: 'index.html'
-        })
+        }),
     ],
-    devtool: 'source-map',
+    // 自动刷新 npm run start, 如果出现报错大多需要 host绑定  127.0.0.1 localhost
+    devServer: {
+        contentBase: './build',
+        open: true, //自动打开浏览器
+        // port: 8080, //默认8080
+    },
+    devtool: 'cheap-module-eval-source-map',
     mode: 'development',
     module: {
         rules: [

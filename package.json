@@ -32,10 +32,11 @@
     "less-loader": "^4.1.0",
     "style-loader": "^0.23.1",
     "webpack": "^4.29.3",
-    "webpack-cli": "^3.2.3"
+    "webpack-cli": "^3.2.3",
+    "webpack-dev-server": "^3.7.2"
   },
   "scripts": {
-    "start": "webpack --config webpack.config.js --progress --display-modules --colors --watch --hot",
+    "start": "webpack-dev-server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
