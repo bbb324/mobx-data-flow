@@ -3,11 +3,10 @@ import {observable, autorun} from 'mobx';
 class TodoStore {
     @observable todos = ['buy m', 'buy n'];
     @observable filter = '';
-
 }
 
-var store = window.store = new TodoStore();
-export default TodoStore;
+let store = window.store = new TodoStore();
+export default store;
 
 autorun(() => {
     console.log(store.filter);
